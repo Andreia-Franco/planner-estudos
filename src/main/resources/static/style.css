@@ -1,0 +1,136 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    color: #333333;
+}
+
+.container {
+    width: 90%;
+    max-width: 700px;
+    margin: 40px auto;
+}
+
+h1 {
+    color: #5b4bdb;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.container > p {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.formulario,
+.lista {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+
+    font-size: 16px;
+}
+
+#botaoAdicionar {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+
+    background-color: #5b4bdb;
+    color: white;
+
+    border: none;
+    border-radius: 6px;
+
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#botaoAdicionar:hover {
+    background-color: #4032ad;
+}
+
+.tarefa {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #fff3cd;
+
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.tarefa h3 {
+    margin-bottom: 5px;
+}
+
+.tarefa span {
+    font-weight: bold;
+}
+.tarefa {
+    margin-bottom: 10px;
+}
+.acoes-tarefa {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.botao-concluir,
+.botao-excluir {
+    padding: 8px 12px;
+
+    border: none;
+    border-radius: 6px;
+
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.botao-concluir {
+    background-color: #d4edda;
+}
+
+.botao-excluir {
+    background-color: #f8d7da;
+}
+
+.tarefa.concluida {
+    background-color: #d4edda;
+}
+
+.tarefa.concluida .conteudo-tarefa p {
+    text-decoration: line-through;
+    opacity: 0.7;
+}

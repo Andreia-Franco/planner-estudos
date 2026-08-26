@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meu Planner de Estudos</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<main class="container">
+
+    <h1>Meu Planner de Estudos</h1>
+
+    <p>Organize suas atividades e acompanhe seus estudos.</p>
+
+
+    <section class="formulario">
+
+        <h2>Nova atividade</h2>
+
+        <label for="materia">Matéria:</label>
+
+        <input
+                type="text"
+                id="materia"
+                placeholder="Exemplo: Java"
+        >
+
+        <label for="atividade">Atividade:</label>
+
+        <input
+                type="text"
+                id="atividade"
+                placeholder="Exemplo: Estudar ArrayList"
+        >
+
+        <button type="button"id="botaoAdicionar">
+            Adicionar atividade
+        </button>
+
+    </section>
+
+
+    <section class="lista">
+
+        <h2>Minhas atividades</h2>
+
+        <div id="listaTarefas">
+
+
+        </div>
+
+    </section>
+
+</main>
+<script src="script.js"></script>
+</body>
+
+</html>
