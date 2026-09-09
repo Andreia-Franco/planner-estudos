@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080/tarefas";
+const API_URL = "/tarefas";
 
 const campoMateria = document.getElementById("materia");
 const campoAtividade = document.getElementById("atividade");
@@ -7,16 +7,30 @@ const listaTarefas = document.getElementById("listaTarefas");
 
 
 // ================================
-// BUSCAR TAREFAS NO JAVA
+// BUSCAR TAREFAS
 // ================================
 
 async function carregarTarefas() {
 
-    const resposta = await fetch(API_URL);
+    try {
 
-    const tarefas = await resposta.json();
+        const resposta = await fetch(API_URL);
 
-    renderizarTarefas(tarefas);
+        if (!resposta.ok) {
+            throw new Error(
+                `Erro ao buscar tarefas: ${resposta.status}`
+            );
+        }
+
+        const tarefas = await resposta.json();
+
+        renderizarTarefas(tarefas);
+
+    } catch (erro) {
+
+        console.error("Erro ao carregar tarefas:", erro);
+
+    }
 }
 
 
@@ -37,6 +51,7 @@ function renderizarTarefas(tarefas) {
         if (tarefa.concluida) {
             novaTarefa.classList.add("concluida");
         }
+
 
         novaTarefa.innerHTML = `
             <div class="conteudo-tarefa">
@@ -127,26 +142,48 @@ botaoAdicionar.addEventListener("click", async function() {
     };
 
 
-    await fetch(API_URL, {
+    try {
 
-        method: "POST",
+        const resposta = await fetch(API_URL, {
 
-        headers: {
-            "Content-Type": "application/json"
-        },
+            method: "POST",
 
-        body: JSON.stringify(novaTarefa)
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-    });
+            body: JSON.stringify(novaTarefa)
 
-
-    campoMateria.value = "";
-    campoAtividade.value = "";
-
-    campoMateria.focus();
+        });
 
 
-    await carregarTarefas();
+        if (!resposta.ok) {
+
+            throw new Error(
+                `Erro ao adicionar tarefa: ${resposta.status}`
+            );
+
+        }
+
+
+        campoMateria.value = "";
+        campoAtividade.value = "";
+
+        campoMateria.focus();
+
+
+        await carregarTarefas();
+
+
+    } catch (erro) {
+
+        console.error("Erro ao adicionar tarefa:", erro);
+
+        alert(
+            "Não foi possível adicionar a tarefa. Veja o console para mais detalhes."
+        );
+
+    }
 
 });
 
@@ -166,20 +203,43 @@ async function atualizarTarefa(tarefa) {
     };
 
 
-    await fetch(`${API_URL}/${tarefa.id}`, {
+    try {
 
-        method: "PUT",
+        const resposta = await fetch(
+            `${API_URL}/${tarefa.id}`,
+            {
 
-        headers: {
-            "Content-Type": "application/json"
-        },
+                method: "PUT",
 
-        body: JSON.stringify(tarefaAtualizada)
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-    });
+                body: JSON.stringify(tarefaAtualizada)
+
+            }
+        );
 
 
-    await carregarTarefas();
+        if (!resposta.ok) {
+
+            throw new Error(
+                `Erro ao atualizar tarefa: ${resposta.status}`
+            );
+
+        }
+
+
+        await carregarTarefas();
+
+
+    } catch (erro) {
+
+        console.error("Erro ao atualizar tarefa:", erro);
+
+        alert("Não foi possível atualizar a tarefa.");
+
+    }
 }
 
 
@@ -189,14 +249,35 @@ async function atualizarTarefa(tarefa) {
 
 async function excluirTarefa(id) {
 
-    await fetch(`${API_URL}/${id}`, {
+    try {
 
-        method: "DELETE"
+        const resposta = await fetch(
+            `${API_URL}/${id}`,
+            {
+                method: "DELETE"
+            }
+        );
 
-    });
+
+        if (!resposta.ok) {
+
+            throw new Error(
+                `Erro ao excluir tarefa: ${resposta.status}`
+            );
+
+        }
 
 
-    await carregarTarefas();
+        await carregarTarefas();
+
+
+    } catch (erro) {
+
+        console.error("Erro ao excluir tarefa:", erro);
+
+        alert("Não foi possível excluir a tarefa.");
+
+    }
 }
 
 
