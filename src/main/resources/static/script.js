@@ -119,11 +119,12 @@ function renderizarTarefas(tarefas) {
 // ADICIONAR TAREFA
 // ================================
 
-botaoAdicionar.addEventListener("click", async function() {
+botaoAdicionar.addEventListener("click", async function(event) {
+
+    event.preventDefault();
 
     const materia = campoMateria.value.trim();
     const atividade = campoAtividade.value.trim();
-
 
     if (materia === "" || atividade === "") {
 
@@ -156,13 +157,10 @@ botaoAdicionar.addEventListener("click", async function() {
 
         });
 
-
         if (!resposta.ok) {
-
-            throw new Error(
-                `Erro ao adicionar tarefa: ${resposta.status}`
-            );
-
+            alert("Erro ao adicionar a tarefa.");
+            console.error("Erro:", resposta.status);
+            return;
         }
 
 
